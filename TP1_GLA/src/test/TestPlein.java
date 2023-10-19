@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPlein {
     private Conteneur C;
-    private Object A1, A2, A3, A4, A5, B1, B2, B3, B4, B5;
+    private Object A1, A2, A3, A4, A5, B1, B2, B3, B4, B5, AX, BX;
 
     // Creation d'un conteneur plein
     @BeforeEach
@@ -52,5 +52,94 @@ public class TestPlein {
         // on verifie que le conteneur n'a pas ete modifie
         assertEquals(C.taille(), 5);
         assertEquals(C.capacite(), 5);
+    }
+    
+    // Objectif de test : on vérifie que les valeurs sont correctes pour les clés existantes
+    // Resultat attendu : Toutes les valeurs correspondent aux clés ajoutées
+    @Test
+    public void testObtenirValeur() throws ErreurConteneur {
+    	//On verifie si les couples sont correctement agencés
+    	assertEquals(B1, C.valeur(A1));
+    	assertEquals(B2, C.valeur(A2));
+    	assertEquals(B3, C.valeur(A3));
+    	assertEquals(B4, C.valeur(A4));
+    	assertEquals(B5, C.valeur(A5));
+    }
+    
+    // Objectif de test : on vérifie que les clés existantes sont présentes
+    // Resultat attendu : Toutes les clés existantes sont présentent 
+    @Test
+    public void testEstPresent(){
+    	//On verifie si les couples sont correctement agencés
+    	assertTrue(C.present(A1));
+    	assertTrue(C.present(A2));
+    	assertTrue(C.present(A3));
+    	assertTrue(C.present(A4));
+    	assertTrue(C.present(A4));
+    }
+    
+    // Objectif de test : on vérifie que les clés retirées ne sont plus présentes
+    // Resultat attendu : Toutes les clés retirées ne sont plus présentent 
+    @Test
+    public void testRetirer(){
+    	
+    	//on retire deux couples clés valeurs
+    	C.retirer(A1);
+    	C.retirer(A2);
+    	
+    	//On verifie la présence des couples retirés
+    	assertFalse(C.present(A1));
+    	assertFalse(C.present(A2));
+    }
+    
+    // Objectif de test : on vérifie que le conteneur est vide après vidage.
+    // Resultat attendu : conteneur vide et Capacité inchangé 
+    @Test
+    public void testVider(){
+    	
+    	//on vide le conteneur
+    	C.retirer(A1);
+    	C.retirer(A2);
+    	C.retirer(A3);
+    	C.retirer(A4);
+    	C.retirer(A5);
+    	
+    	//on vérifie si le conteneur est vide 
+    	assertTrue(C.estVide());
+    	
+    	//On vérifie que la capacité n'a pas changé
+    	assertEquals(C.capacite(), 5);
+    }
+    
+    // Objectif : Teste le nombre de couples clé-valeur après le retrait
+    // Resultat attendu : les éléments supprimés n'apparaissent plus dans le conteneur
+    @Test
+    public void testNombreCouplesApresRetrait() {
+    	
+    	// on vérifie que le nombre de couples est correct
+    	assertEquals(C.taille(), 5);
+    	
+    	//on retire deux éléments
+    	C.retirer(A1);
+    	C.retirer(A2);
+    	
+    	// on vérifie à nouveau que le nombre de couples est correct.
+    	assertEquals(C.taille(), 3);
+    	
+        //l'élément retiré n'est plus présent dans le conteneur
+        assertFalse(C.present(A1));
+    }
+    
+    // Objectif : Ajout d'un couple clé-valeur à un conteneur plein
+    // Resultat attendu : on lève une exception
+    @Test
+    public void testAjoutSurConteneurPlein() {
+    	
+    	AX = new Object();
+        BX = new Object();
+        
+        // on tente d'ajouter un couple clé-valeur
+        assertThrows(DebordementConteneur.class,() -> C.ajouter(AX, BX));
+    	
     }
 }

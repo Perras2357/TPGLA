@@ -22,4 +22,19 @@ public class TestInit {
         assertEquals(C.taille(), 0);
         assertEquals(C.capacite(), 5);
     }
+    
+    // Objectif de test :Augmentation de la capacité si le conteneur est plein
+    // Resultat attendu : Conteneur avec une capacité plus grande
+    @Test
+    public void capacitéConteneurPlein() throws ErreurConteneur {
+        
+    	//on vérifie si le conteneur est plein en comparant la capacité avec la taille du conteneur
+    	assertEquals(C.taille(),C.capacite());
+    	
+    	//on redimension le conteneur
+    	C.redimensionner(6);
+    	
+    }
+    
+    
 }

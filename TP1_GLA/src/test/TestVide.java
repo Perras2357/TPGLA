@@ -57,14 +57,4 @@ public class TestVide {
         assertEquals(2,C.taille());
     }
     
- // Objectif : Teste le nombre de couples clé-valeur après le retrait
-    // Resultat attendu : L'élément supprimé n'apparait plus dans le conteneur
-    @Test
-    public void testNombreCouplesApresRetrait() {
-    	
-        C.retirer(A1);
-        
-        //l'élément retiré n'est plus présent dans le conteneur
-        assertFalse(C.present(A1));
-    }
 }
