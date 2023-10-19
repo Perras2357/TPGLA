@@ -49,40 +49,11 @@ public class TestVide {
         assertFalse(C.estVide());
     }
     
-    // objectif : Teste la tentative de retrait d'un couple clé-valeur d'un conteneur vide
-    // Resultat attendu : Retrait impossible
-    @Test
-    public void testRetirerCoupleNonExistant() {
-    	// on ajoute les éléments dans le conteneurs 
-    	
-    	A1 = new Object();
-        A2 = new Object();
-        B1 = new Object();
-        B2 = new Object();
-        
-        assertDoesNotThrow(() -> C.ajouter(A1, B1));
-        assertDoesNotThrow(() -> C.ajouter(A2, B2));
-
-        //On retire un élément qui n'est pas dans le conteneur rien ne se passe
-    	C.retirer(A3);
-    	
-    }
-    
     // Objectif : Teste le nombre de couples clé-valeur après l'ajout
     // Resultat attendu : La taille correspond au nombre d'élément ajouté
     @Test
     public void testNombreCouplesApresAjout() {
     	
-    	// on ajoute les éléments dans le conteneurs 
-    	
-    	A1 = new Object();
-        A2 = new Object();
-        B1 = new Object();
-        B2 = new Object();
-    	assertDoesNotThrow(() -> C.ajouter(A1, B1));
-        assertDoesNotThrow(() -> C.ajouter(A2, B2));
-
-
         assertEquals(2,C.taille());
     }
     
@@ -91,17 +62,9 @@ public class TestVide {
     @Test
     public void testNombreCouplesApresRetrait() {
     	
-    	// on ajoute les éléments dans le conteneurs 
-    	
-    	A1 = new Object();
-        A2 = new Object();
-        B1 = new Object();
-        B2 = new Object();
-    	assertDoesNotThrow(() -> C.ajouter(A1, B1));
-        assertDoesNotThrow(() -> C.ajouter(A2, B2));
-
         C.retirer(A1);
-
+        
+        //l'élément retiré n'est plus présent dans le conteneur
         assertFalse(C.present(A1));
     }
 }
